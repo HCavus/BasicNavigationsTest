@@ -1,4 +1,4 @@
-package com.cbt.tests.NavigationTest;
+package com.cbt.tests;
 
 import com.cbt.utilities.BrowserFactory;
 
@@ -18,9 +18,9 @@ public class NavigationTests {
      */
     public static void main(String[] args) {
 
-        //getChrome();
-        //getFirefox();
-        getEdge();
+        getChrome();
+       // getFirefox();
+        //getEdge();
     }
 
     public static void getChrome(){
