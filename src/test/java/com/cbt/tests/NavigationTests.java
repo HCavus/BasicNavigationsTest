@@ -2,6 +2,7 @@ package com.cbt.tests;
 
 import com.cbt.utilities.BrowserFactory;
 
+import com.cbt.utilities.StringUtility;
 import org.openqa.selenium.WebDriver;
 
 public class NavigationTests {
@@ -23,14 +24,16 @@ public class NavigationTests {
         //getEdge();
     }
 
-    public static void getChrome(){
-        WebDriver driver= BrowserFactory.getDriver("Chrome");
+    public static void getChrome() {
+        WebDriver driver = BrowserFactory.getDriver("Chrome");
         driver.get("http://google.com");
-        String ggltitle1=driver.getTitle();
+        String ggltitle1 = driver.getTitle();
         driver.navigate().to("https://etsy.com");
-        String etsyTitle1=driver.getTitle();
+        String etsyTitle1 = driver.getTitle();
         driver.navigate().back();
-        String ggTitle2=driver.getTitle();
+        String ggTitle2 = driver.getTitle();
+       // StringUtility.verifyEquals(ggltitle1, ggTitle2);
+
       if(ggltitle1.equals(ggTitle2)){
           System.out.println("PASS ON CHROME");
       }else{
@@ -38,6 +41,8 @@ public class NavigationTests {
           System.out.println("Expect result: "+ggltitle1);
           System.out.println("Actual result: "+ggTitle2);
       }
+
+
       driver.navigate().forward();
         String etsyTitle2=driver.getTitle();
         if(etsyTitle1.equals(etsyTitle2)){
@@ -106,6 +111,6 @@ public class NavigationTests {
         driver.close();
     }
 
-
     }
+
 
