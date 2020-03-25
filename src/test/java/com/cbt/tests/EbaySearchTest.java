@@ -47,12 +47,14 @@ public class EbaySearchTest {
         Thread.sleep(3000);
         driver.navigate().back();
         WebElement searchBox1=driver.findElement(By.id("gh-ac"));
-        String value1=searchBox1.getAttribute("label");
+        String value1=searchBox1.getAttribute("value");
 
-        if(value1.equals("Search for anything")){
+        if(value1.isEmpty()){
             System.out.println("Pass: Search Box on first page is empty");
         }else{
-            System.out.println("Fail: Search Box on first page is not empty");
+            System.out.println("Fail");
+            System.out.println("Expected a blank value");
+            System.out.println("Actual: "+value1);
         }
         driver.close();
     }

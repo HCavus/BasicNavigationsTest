@@ -8,6 +8,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BrowserFactory {
     public static WebDriver getDriver(String browserType) {
+      // String property=System.getProperty("os.name");
+       // public static void getOsInfo(String name)
+       // {
+        //    System.out.println("OS: " + System.getProperty("os.name") + "; Version: " + System.getProperty("os.version"));
+       // }
+
         //local variables must be initialized
         WebDriver driver=null;
         switch(browserType.toLowerCase()){
