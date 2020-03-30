@@ -1,16 +1,14 @@
-package com.cbt.tests;
+package com.cbt.tests.FirstSeleniumHomework;
 
 import com.cbt.utilities.BrowserFactory;
+
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class TitleVerificationTestNG {
-    @Test
-    public void verifyTitle() throws InterruptedException {
+public class TitleVerificationTests {
+    public static void main(String[] args) throws InterruptedException {
         List<String> urls = Arrays.asList("http://practice.cybertekschool.com/",
                 "http://practice.cybertekschool.com/dropdown",
                 "http://practice.cybertekschool.com/login");
@@ -28,14 +26,25 @@ public class TitleVerificationTestNG {
         driver.navigate().to(urls.get(2));
         String title3=driver.getTitle();
         String url3=driver.getCurrentUrl();
-        System.out.println("VERIFYING TITLES");
-        Assert.assertEquals(title1,title2,title3);
 
+        if(title1.equals(title2) && title1.equals(title3)){
+            System.out.println("Verifying Titles: PASS");
+        }else{
+            System.out.println("Verifying Titles: FAIL");
+            System.out.println("title 1:"+title1);
+            System.out.println("title 2:"+title2);
+            System.out.println("title 3:"+title3);
+        }
         String urlPart="http://practice.cybertekschool.com";
-        System.out.println("VERIFYING URL STARTS WITH "+urlPart);
-       Assert.assertTrue(url1.startsWith(urlPart) && url2.startsWith(urlPart) && url3.startsWith(urlPart));
-
-        driver.close();
+if(url1.startsWith(urlPart) && url2.startsWith(urlPart) && url3.startsWith(urlPart)){
+    System.out.println("Verifying URLS PASS. All pages start with "+urlPart);
+}else{
+    System.out.println("Verifying URLS: FAIL");
+    System.out.println("URL 1: "+url1);
+    System.out.println("URL 2: "+url2);
+    System.out.println("URL 3: "+url3);
+}
+driver.close();
 
     }
 }

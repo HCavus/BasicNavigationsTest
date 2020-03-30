@@ -1,4 +1,4 @@
-package com.cbt.tests;
+package com.cbt.tests.FirstTestNGHomework;
 
 import com.cbt.utilities.BrowserFactory;
 import org.openqa.selenium.WebDriver;

@@ -1,15 +1,12 @@
-package com.cbt.tests;
+package com.cbt.tests.FirstSeleniumHomework;
 
 import com.cbt.utilities.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
-public class AmazonTitleWithTestNG {
-    @Test
-    public void verifySearch() throws InterruptedException {
+public class AmazonTitle {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver= BrowserFactory.getDriver("chrome");
         driver.get("https://www.amazon.com/");
         driver.manage().window().fullscreen();
@@ -17,11 +14,13 @@ public class AmazonTitleWithTestNG {
         WebElement searchBox=driver.findElement(By.id("twotabsearchtextbox"));
         searchBox.sendKeys("search");
         WebElement searchButton=driver.findElement(By.xpath("//input[@ class='nav-input']"));
-        searchButton.click();
+       searchButton.click();
         String title=driver.getTitle();
-        System.out.println("VERIFYING TITLE CONTAINS 'search' TERM");
-        Assert.assertTrue(title.contains("search"));
-
+        if(title.contains("search")){
+            System.out.println("PASS: "+title+" contains 'search' term");
+        }else{
+            System.out.println("FAIL: "+title+" does not contains search term");
+        }
         driver.close();
     }
 }
