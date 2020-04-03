@@ -1,4 +1,4 @@
-package com.cbt.tests;
+package com.cbt.officehours;
 
 import com.cbt.utilities.BrowserFactory;
 import org.junit.Test;

@@ -1,6 +1,7 @@
 package com.cbt.officehours;
 
 import com.cbt.utilities.BrowserFactory;
+import com.cbt.utilities.Driver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -9,11 +10,12 @@ public class UnderstandingJavaScript {
     @Test(priority = 0, description = "Send text to search box on etsy")
     public void test1() {
         //Driver instance created
-        WebDriver driver = BrowserFactory.getDriver("chrome");
+        WebDriver driver = Driver.getDriver("chrome");
         //Navigating to etsy homepage
         driver.get("https://www.etsy.com/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.getElementById('global-enhancements-search-query').value='Send these characters'");
+        driver.close();
     }
 
     @Test(priority = 2, description = "get the page title (return a value)")
