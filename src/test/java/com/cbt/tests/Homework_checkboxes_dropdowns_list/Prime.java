@@ -10,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class Prime {
     WebDriver driver;
 
@@ -34,24 +36,36 @@ public class Prime {
      8. verify that name first result that has prime label is different
      */
     @Test
-    public void test(){
+    public void test() {
         driver.get("https://amazon.com");
 
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon");
         driver.findElement(By.xpath("//input[@type='submit']")).submit();
-        WebElement primeLabel=driver.findElement(By.xpath("(//i[@aria-label='Amazon Prime'])[1]"));
-        Assert.assertTrue(primeLabel.isDisplayed());
-        String prime=primeLabel.getAttribute("aria-label");
-        System.out.println(prime);
+       driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        WebElement firstitem=driver.findElement(By.xpath("(//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
+        String prime1=firstitem.getText();
+        System.out.println(prime1);
 
-        WebElement checkBox=driver.findElement(By.xpath("(//i[@class='a-icon a-icon-checkbox'])[1]"));
+
+        WebElement checkBox=driver.findElement(By.xpath("//i[@aria-label='Prime Eligible']/../div/label/i"));
        checkBox.click();
+        //verify that name first result that has prime label is same as step 4
 
-       WebElement primeLabel2=driver.findElement(By.xpath("//li[@aria-label='Mondayou']/span/a/div/label/i"));
-        Assert.assertTrue(primeLabel2.isDisplayed());
-
-        String prime2=primeLabel2.getAttribute("aria-label");
+        WebElement secondItem=driver.findElement(By.xpath("(//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
+        String prime2=secondItem.getText();
         System.out.println(prime2);
-        Assert.assertEquals(prime,prime2);
+        Assert.assertFalse(prime1.equals(prime2));
+
+        //check the last checkbox under Brand on the left
+
+         WebElement lastcheckbox=driver.findElement(By.xpath("//ul[@aria-labelledby='p_89-title']/li[10]/span/a/div/label/i"));
+
+        lastcheckbox.click();
+
+       // WebElement thirdItem=driver.findElement(By.xpath("//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
+        //String prime3=thirdItem.getText();
+
+        //verify that name first result that has prime label is different
+       // Assert.assertFalse(prime1.equals(prime3));
     }
 }
