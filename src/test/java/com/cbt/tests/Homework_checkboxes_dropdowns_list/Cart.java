@@ -41,30 +41,46 @@ public class Cart {
     public void test(){
 
         driver.get("https://amazon.com");
-
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon");
         driver.findElement(By.xpath("//input[@type='submit']")).submit();
-
+        driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS);
         Random ran=new Random();
-        //int num=ran.nextInt(100);
-        int num=4;
-        List< WebElement>item=driver.findElements(By.xpath("(//a[@class='a-link-normal a-text-normal']/span)["+num+"]"));
-        System.out.println(item.size());
-        Assert.assertEquals(item.size(),1);
-        String itemName=item.get(0).getText();
+        int num=ran.nextInt(100);
+
+        //remember the name  of a random result
+         WebElement item=driver.findElement(By.xpath("(//a[@class='a-link-normal a-text-normal']/span)["+num+"]"));
+         String itemName=item.getText();
         System.out.println("Item name: "+itemName);
+
+        //remember the the price of a random result
         WebElement priceitem=driver.findElement(By.xpath("(//span[@class='a-price'])["+num+"]"));
         String price=priceitem.getText();
         System.out.println("Item price: "+price);
-       driver.findElement(By.linkText(itemName)).click();
-       WebElement product=driver.findElement(By.id("productTitle"));
-       String productName=product.getText();
-        System.out.println(productName);
-        Assert.assertEquals(itemName,productName);
-       WebElement price1=driver.findElement(By.id("//span[@id='priceblock_ourprice']"));
 
-       String productprice=price1.getText();
-        System.out.println(productprice);
-       Assert.assertEquals(price,productprice);
+        //click on that random result
+        driver.findElement(By.linkText(itemName)).click();
+
+        //verify default quantity of items is 1
+      List<WebElement> product=driver.findElements(By.id("productTitle"));
+       Assert.assertEquals(product.size(),1);
+
+        //verify that the name  is the same as the one from step 5
+        WebElement product1=driver.findElement(By.id("productTitle"));
+         String productName=product1.getText();
+         System.out.println("Product name: "+productName);
+         Assert.assertEquals(itemName,productName);
+
+         //the price is the same as the one from step 5
+
+         WebElement price1=driver.findElement(By.xpath("//span[@class='a-size-medium a-color-price']"));
+         String productprice=price1.getText();
+         System.out.println("product price: "+productprice);
+        System.out.println("verifying the prices are the same");
+        System.out.println("First price: "+price);
+        System.out.println("Second price: "+productprice);
+
+       // verify button "Add to Cart" is visible
+        WebElement addToCart=driver.findElement(By.id("add-to-cart-button"));
+        Assert.assertTrue(addToCart.isDisplayed());
     }
 }

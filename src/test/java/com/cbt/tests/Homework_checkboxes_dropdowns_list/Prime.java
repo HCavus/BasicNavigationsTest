@@ -42,30 +42,31 @@ public class Prime {
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon");
         driver.findElement(By.xpath("//input[@type='submit']")).submit();
        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+       //remember name first result that has prime label
         WebElement firstitem=driver.findElement(By.xpath("(//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
-        String prime1=firstitem.getText();
-        System.out.println(prime1);
+        String firstItemName=firstitem.getText();
+        System.out.println("First item name: "+firstItemName);
 
-
+        //select Prime checkbox on the left
         WebElement checkBox=driver.findElement(By.xpath("//i[@aria-label='Prime Eligible']/../div/label/i"));
-       checkBox.click();
-        //verify that name first result that has prime label is same as step 4
+        checkBox.click();
 
+        //verify that name first result that has prime label is same as step 4
         WebElement secondItem=driver.findElement(By.xpath("(//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
-        String prime2=secondItem.getText();
-        System.out.println(prime2);
-        Assert.assertFalse(prime1.equals(prime2));
+        String secondItemName=secondItem.getText();
+        System.out.println("Second item name: "+secondItemName);
+        Assert.assertTrue(firstItemName.equals(secondItemName));
 
         //check the last checkbox under Brand on the left
-
-         WebElement lastcheckbox=driver.findElement(By.xpath("//ul[@aria-labelledby='p_89-title']/li[10]/span/a/div/label/i"));
-
+        WebElement lastcheckbox=driver.findElement(By.xpath("//ul[@aria-labelledby='p_89-title']/li[10]/span/a/div/label/i"));
         lastcheckbox.click();
 
-       // WebElement thirdItem=driver.findElement(By.xpath("//i[@aria-label='Amazon Prime']/../../../../../../div[2]/h2/a/span)[1]"));
-        //String prime3=thirdItem.getText();
+       WebElement thirdItem=driver.findElement(By.xpath("(//span[@class='a-size-base-plus a-color-base a-text-normal'])[1]"));
+        String thirdItemName=thirdItem.getText();
+        System.out.println("Third item name: "+thirdItemName);
 
         //verify that name first result that has prime label is different
-       // Assert.assertFalse(prime1.equals(prime3));
+        Assert.assertFalse(firstItemName.equals(thirdItemName));
     }
 }
