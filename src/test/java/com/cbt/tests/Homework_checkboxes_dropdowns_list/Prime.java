@@ -21,10 +21,10 @@ public class Prime {
 
     }
 
-//    @AfterMethod
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
     /*
     1. go to https://amazon.com
     2. search for "wooden spoon"

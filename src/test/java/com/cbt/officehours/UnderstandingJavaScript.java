@@ -10,7 +10,7 @@ public class UnderstandingJavaScript {
     @Test(priority = 0, description = "Send text to search box on etsy")
     public void test1() {
         //Driver instance created
-        WebDriver driver = Driver.getDriver("chrome");
+        WebDriver driver = Driver.getDriver();
         //Navigating to etsy homepage
         driver.get("https://www.etsy.com/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
